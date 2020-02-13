@@ -1,0 +1,47 @@
+extends layout
+
+block content
+    h1 Create book
+
+    if errors
+        each error in errors
+            .alert.alert-danger= error
+
+    form(action="/", method="POST")
+        .form-group
+            label(for="tittle") Title
+            input.form-control(type="text", name="title", required="required")
+        .form-group
+            label(for="tittle") Description
+            input.form-control(type="text", name="description", required="required")  
+        .form-group
+            label(for="tittle") Author
+            input.form-control-file(type="text", name="author", required="required")      
+
+        button(class="btn btn-primary", type="submit") Create
+
+    .content_book
+        h2 Read Books
+        .list_books
+            each book in books
+                ul
+                    li
+                        span Title:&nbsp
+                        =book.title
+                    li
+                        span Description:&nbsp
+                        =book.description
+                    li
+                        span Author:&nbsp
+                        =book.author    
+                    li
+                        span ID:&nbsp
+                        =book._id        
+
+    .content_book
+        h2 Delete Books
+        form(action="/delete" method="POST")
+            div
+                label(for="id") ID
+                input(type="text" name="id" required="required")
+            button(class="btn btn-primary", type="submit") Delete
